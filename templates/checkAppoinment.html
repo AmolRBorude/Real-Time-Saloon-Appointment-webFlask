@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check Appointment</title>
+    <link rel="stylesheet" href="/static/appointment_check.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .success { color: white; }
+        .error { color: white; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>🔍 Check Your Appointment</h2>
+    <form action="{{ url_for('check_appointment') }}" method="POST">
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="btn">Check Appointment</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% if appointments %}
+        <div class="results">
+            <h3>📅 Your Appointments</h3>
+            {% for appt in appointments %}
+                <div class="appointment-card">
+                    <p><strong>ID:</strong> {{ appt.id }}</p>
+                    <p><strong>Date:</strong> {{ appt.date }}</p>
+                    <p><strong>Time:</strong> {{ appt.time }}</p>
+
+                   
+                    <form action="{{ url_for('editData',id=appt.id)}}" method="GET" style="display:inline;">
+                        <button type="submit" style="padding: 6px 12px; margin-right: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        Edit</button>
+                    </form>
+
+                    
+                    <form action="{{ url_for('deletepage', id=appt.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to cancel this appointment?');">
+                        <button type="submit" style="padding: 6px 12px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        Cancel</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

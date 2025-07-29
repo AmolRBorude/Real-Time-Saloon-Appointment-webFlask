@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointment Registration</title>
+    <link rel="stylesheet" href="/static/styleAppoinment.css">
+
+    <!-- Font Awesome for optional icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div id="toast-container">
+      {% for category, message in messages %}
+        <div class="toast {{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="card">
+    <h2><i class="fas fa-calendar-check"></i> Book Appointment</h2>
+    <form action="/appinment" method="POST" onsubmit="return validateForm()">
+        <div class="input-box">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="input-box">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your Gmail" required>
+        </div>
+
+        <div class="input-box">
+            <label for="password">Create Password</label>
+            <input type="password" id="password" name="password" placeholder="Create a password" required>
+        </div>
+
+        <div class="input-box">
+            <label for="date">Appointment Date</label>
+            <input type="date" id="date" name="date" required>
+        </div>
+
+        <div class="input-box">
+            <label for="time">Appointment Time</label>
+            <input type="time" id="time" name="time" required min="00:00" max="23:59" step="60">
+        </div>
+
+        <button type="submit" class="btn">Register Appointment</button>
+        <br><br>
+    </form>
+</div>
+
+<script>
+    // Flash message timeout
+    setTimeout(() => {
+        const toasts = document.querySelectorAll('.toast');
+        toasts.forEach(toast => {
+            toast.style.display = 'none';
+        });
+    }, 3000);
+
+    // Set min date to today
+    window.onload = function () {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const minDate = `${yyyy}-${mm}-${dd}`;
+        document.getElementById("date").setAttribute("min", minDate);
+    };
+
+    // Form validation
+    function validateForm() {
+        const email = document.getElementById("email").value;
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
+
+        // Email must be Gmail
+        if (!email.endsWith("@gmail.com"))
+         {
+            alert("Please use a valid Gmail address (e.g., example@gmail.com).");
+            return false;
+        }
+
+        // Disallow past dates
+        const selectedDate = new Date(date);
+        const today = new Date();
+        today.setHours(0,0,0,0); // remove time portion
+        if (selectedDate < today)
+        {
+            alert("Appointment date cannot be in the past.");
+            return false;
+        }
+
+        // Time validation (HTML handles most of it)
+        if (!time)
+        {
+            alert("Please select a valid appointment time.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+</body>
+</html>

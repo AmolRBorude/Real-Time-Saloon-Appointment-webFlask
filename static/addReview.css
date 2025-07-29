@@ -1,0 +1,163 @@
+body {
+    background: linear-gradient(rgba(0,0,0,0.5), #009688), url('/static/banner.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.review-card {
+    background: rgba(255, 255, 255, 0.15); /* Transparent white */
+    padding: 40px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); /* Glass blur effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    color: #fff; /* Adjust text color for contrast */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.review-card h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+   display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #fff;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.star-rating {
+    direction: rtl;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #FFD700;
+}
+
+.submit-btn {
+    background: #fff;
+    color: #009688;
+    border: none;
+    padding: 14px 0;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    
+    transition: background 0.3s;
+
+}
+
+.submit-btn:hover {
+    background: #00796B;
+    color: #fff;
+}
+
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #009688;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(rgba(0, 150, 136, 0.8), rgba(0, 150, 136, 0.8)), url("banner.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+@media screen and (max-width: 600px) {
+    .review-card {
+        padding: 25px 20px;
+        max-width: 90%;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    .star-rating label {
+        font-size: 20px;
+    }
+
+    .submit-btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .review-card h2 {
+        font-size: 20px;
+    }
+}
+
+

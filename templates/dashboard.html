@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <!-- Include Bootstrap for styling (optional) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <h1>Welcome to your Dashboard</h1>
+                <p>Hello , {{ current_user.name }} </p>
+                <p>{{ current_user.email }} </p>
+                <a href="/logout" class="btn btn-dark">Logout</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
